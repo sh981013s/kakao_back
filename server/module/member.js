@@ -43,24 +43,26 @@ router.post('/signin', (req, res) => {
 });
 
 router.get("/me", (req, res) => {
-    console.log(req,'::::')
-    // db.query('SELECT * FROM member where token = ?', [value], (err, rows) => {
-    //     if (err) {
-    //         throw err;
-    //     }
-    //     if(rows.length === 1){
-    //         let parameter = {
-    //             userInfo : rows,
-    //             resultType : 'success'
-    //         }
-    //         res.send(parameter);
-    //     }else{
-    //         let parameter = {
-    //             resultType : 'fail'
-    //         }
-    //         res.send(parameter);
-    //     }
-    // });
+    let value = req.query;
+    console.log(value.token,'value.token')
+    db.query('SELECT * FROM member where token = ?', [value.token], (err, rows) => {
+        if (err) {
+            throw err;
+        }
+        console.log(rows,':::')
+        if(rows.length === 1){
+            let parameter = {
+                userInfo : rows,
+                resultType : 'success'
+            }
+            res.send(parameter);
+        }else{
+            let parameter = {
+                resultType : 'fail'
+            }
+            res.send(parameter);
+        }
+    });
 
 });
 
