@@ -42,6 +42,12 @@ router.post('/signin', (req, res) => {
     });
 });
 
+router.post("/me", (req, res) => {
+    console.log(req,':::')
+
+});
+
+
 router.post("/signup", (req, res) => {
    console.log(req,':::')
     let value = req.body;
@@ -58,5 +64,7 @@ router.post("/signup", (req, res) => {
     //     });
     // });
 });
+
+
 
 module.exports = router;
