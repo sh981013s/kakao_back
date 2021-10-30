@@ -9,10 +9,9 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 
 const allowlist = ['http://localhost', 'http://localhost:3000'];
-
+app.use(express.static('public'));
 var corsOptionsDelegate = function (req, callback) {
 	let corsOptions;
-
 	if (allowlist.indexOf(req.header('Origin')) !== -1) {
 		corsOptions = { origin: true, credentials: true }; // reflect (enable) the requested origin in the CORS response,
 	} else {

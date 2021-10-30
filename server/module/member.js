@@ -68,14 +68,19 @@ router.get("/me", (req, res) => {
 
 router.post("/signup", (req, res) => {
     let value = req.body;
-    // bcryptjs.genSalt(10, (err, salt) => {
+
+    db.query('insert into member(email, pw, tel,name ,reg_date )  value(?,?,?,?,now())', [value.email, value.pw, value.tel, 'tester'], (err, rows) => {
+        if (err) {
+            throw err;
+        }
+        let parameter = {
+            resultType : 'success'
+        }
+        res.send(parameter);
+
+    });
 });
 
-
-router.post("/signup", (req, res) => {
-    let value = req.body;
-    // bcryptjs.genSalt(10, (err, salt) => {
-});
 
 
 module.exports = router;
