@@ -49,7 +49,6 @@ router.get("/me", (req, res) => {
         if (err) {
             throw err;
         }
-        console.log(rows,':::')
         if(rows.length === 1){
             let parameter = {
                 userInfo : rows,
@@ -70,9 +69,13 @@ router.get("/me", (req, res) => {
 router.post("/signup", (req, res) => {
     let value = req.body;
     // bcryptjs.genSalt(10, (err, salt) => {
-
 });
 
+
+router.post("/signup", (req, res) => {
+    let value = req.body;
+    // bcryptjs.genSalt(10, (err, salt) => {
+});
 
 
 module.exports = router;
