@@ -42,7 +42,7 @@ router.post('/signin', (req, res) => {
     });
 });
 
-router.post("/me", (req, res) => {
+router.get("/me", (req, res) => {
     console.log(req,':::')
 
 });
