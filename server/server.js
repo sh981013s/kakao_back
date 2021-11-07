@@ -3,6 +3,7 @@ const app = express();
 const port = 8080;
 const member = require('./module/member');
 const friend = require('./module/friend');
+const chat = require('./module/chat');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -28,6 +29,7 @@ app.use(cookieParser('kakaoCooKiEKey'));
 
 app.use('/member', member);
 app.use('/friend', friend);
+app.use('/chat', chat);
 
 function scheduleGc() {
 	if (!global.gc) {

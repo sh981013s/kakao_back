@@ -44,7 +44,6 @@ router.post('/signin', (req, res) => {
 
 router.get("/me", (req, res) => {
     let value = req.query;
-    console.log(value.token,'value.token')
     db.query('SELECT * FROM member where token = ?', [value.token], (err, rows) => {
         if (err) {
             throw err;
@@ -69,7 +68,7 @@ router.get("/me", (req, res) => {
 router.post("/signup", (req, res) => {
     let value = req.body;
 
-    db.query('insert into member(email, pw, tel,name ,reg_date )  value(?,?,?,?,now())', [value.email, value.pw, value.tel, 'tester'], (err, rows) => {
+    db.query('insert into member(email, pw, name, tel, birth, sex, reg_date)  value(?,?,?,?,?,?,now())', [value.email, value.pw, value.name, value.tel, value.birth, value.sex], (err, rows) => {
         if (err) {
             throw err;
         }

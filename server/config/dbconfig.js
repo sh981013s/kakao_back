@@ -1,14 +1,9 @@
-
-
 const dbconfig = {
-	host: 'kakaoproject3952.mysql.database.azure.com',
-	user: 'kakao@kakaoproject3952',
-	password: 'vlzkcb1324!',
+	host: 'localhost',
+	user: 'root',
+	password: '12345678',
 	port: 3306,
 	database: 'kakao_friends',
-	ssl: {
-		rejectUnauthorized: true,
-	}
 };
 
 module.exports = dbconfig;
