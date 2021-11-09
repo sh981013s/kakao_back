@@ -68,7 +68,7 @@ router.get("/me", (req, res) => {
 router.post("/signup", (req, res) => {
     let value = req.body;
 
-    db.query('insert into member(email, pw, name, tel, birth, sex, reg_date)  value(?,?,?,?,?,?,now())', [value.email, value.pw, value.name, value.tel, value.birth, value.sex], (err, rows) => {
+    db.query('insert into member(email, pw, name, tel, birth, sex, reg_date, id)  value(?,?,?,?,?,?,now(),?)', [value.email, value.pw, value.name, value.tel, value.birth, value.sex, value.id], (err, rows) => {
         if (err) {
             throw err;
         }
