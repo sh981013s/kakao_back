@@ -6,6 +6,9 @@ const randtoken = require('rand-token');
 /**
  * @description test
  */
+
+
+
 router.get('/getFriends', (req, res) => {
     db.query('SELECT * FROM member', [], (err, rows) => {
         if (err) {
@@ -44,6 +47,7 @@ router.post('/signin', (req, res) => {
 
 router.get("/me", (req, res) => {
     let value = req.query;
+    console.log(value,'val');
     db.query('SELECT * FROM member where token = ?', [value.token], (err, rows) => {
         if (err) {
             throw err;
@@ -63,6 +67,17 @@ router.get("/me", (req, res) => {
     });
 
 });
+
+router.get("/myinfo", (req, res) => {
+    let value = req.query;
+    db.query('SELECT * FROM member where uid = ?', [value.uid], (err, rows) => {
+        if (err) {
+            throw err;
+        }
+        res.send(rows);
+    });
+});
+
 
 
 router.post("/signup", (req, res) => {

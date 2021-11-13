@@ -10,7 +10,6 @@ router.get("/getFriends", (req, res) => {
     let value = req.query
     db.query('select a.uid, a.name, a.birth, a.pic, a.state  from member a inner join friends b on a.uid = b.friend where b.owner = ?', [value.uid], (err, rows) => {
         res.send(rows);
-        console.log(rows)
     });
 });
 
@@ -48,9 +47,10 @@ router.get('/searchFriendsById', (req, res) => {
     });
 });
 
-router.get('/searchFriendsByContacts', (req, res) => {
+router.get('/searchFriendsByContact', (req, res) => {
     let value = req.query;
-    db.query('SELECT * FROM member where id = ?', [value.keyword], (err, rows) => {
+    console.log(value);
+    db.query('SELECT * FROM member where tel = ?', [value.keyword], (err, rows) => {
         if (err) {
             throw err;
         }
@@ -58,12 +58,14 @@ router.get('/searchFriendsByContacts', (req, res) => {
             const  fdKey = rows[0].uid
             db.query('select a.uid, a.name, a.birth, a.pic, a.state  from member a inner join friends b on a.uid = b.friend where b.owner = ? and b.friend = ?', [value.uid, fdKey], (err, row) => {
                 if(!!row[0]){
+                    // already exists
                     const parameter = {
                         resultType : 1,
                         fdInfo : rows[0]
                     }
                     res.send(parameter);
                 }else{
+                    // has to be added
                     const parameter = {
                         resultType : 2,
                         fdInfo : rows[0]
@@ -87,7 +89,6 @@ router.post('/addFriends', (req, res) => {
         if (err) {
             throw err;
         }
-        console.log(rows,':::result')
         res.send(rows);
     });
 });
