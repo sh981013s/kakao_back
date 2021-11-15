@@ -70,6 +70,7 @@ router.get("/me", (req, res) => {
 
 router.get("/myinfo", (req, res) => {
     let value = req.query;
+    console.log(value.uid,'val');
     db.query('SELECT * FROM member where uid = ?', [value.uid], (err, rows) => {
         if (err) {
             throw err;
@@ -77,6 +78,8 @@ router.get("/myinfo", (req, res) => {
         res.send(rows);
     });
 });
+
+
 
 
 

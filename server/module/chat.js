@@ -28,12 +28,10 @@ const indexDataReudcer = (acc, cur, idx) => {
     if (acc[acc.length-1].date === dateToUse) {
         const popData = acc.pop();
         if(typeof popData.time === 'string') {
-            console.log(popData,'string')
             return(
                 [...acc,{date: dateToUse, time: [popData.time,timeToUse], contents: [popData.contents,cur.contents]}]
             )
         } else {
-            console.log(...popData.time,'array')
             return(
                 [...acc,{date: dateToUse, time: [...popData.time,timeToUse], contents: [...popData.contents,cur.contents]}]
             )
@@ -56,13 +54,14 @@ router.post("/getMyChatlist", (req, res) => {
 
 router.post("/addChat", (req, res) => {
     let value = req.body;
-    console.log('sex');
-    console.log(value,'lol')
     const nowDate = new Date();
     // console.log(nowDate,':::')
     db.query('insert into chatlist(contents, uid, time) values(?,?,?)', [value.contents, value.uid, nowDate], (err, rows) => {
-        res.send(rows);
-        // console.log(rows)
+        // res.send(rows);
+        db.query('select contents,time from chatlist where uid = ?', [value.uid], (err, rows) => {
+            const list = rows.reduce(indexDataReudcer,'')
+            res.send({list: list});
+        });
     });
 });
 
